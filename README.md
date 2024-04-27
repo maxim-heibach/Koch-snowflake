@@ -9,32 +9,32 @@ Die Koch-Kurve ist eine fraktale Struktur, die ausgehend von einem Polygon mit n
 
 Die Abbildung zeigt ein Beispielpolygon sowie verschiedene Unterteilungsstufen der entstehenden Koch-Kurven.
 
-![Koch-Kurve](Koch_snowflake.png)
+![Koch-Kurve](pictures/Koch_snowflake.png)
 
 In dieser Aufgabe sollen Sie schrittweise eine Visualisierung von Koch-Kurven in Java implementieren.
 
-1. Implementieren Sie eine von *JFrame* abgeleitete Klasse mit einem inneren *JPanel*. Die Größe des Frame bzw. Panel können Sie beliebig wählen. Zeichnen Sie in das Fenster sodann ein Polygon.  
+1. Implementieren Sie eine von `JFrame` abgeleitete Klasse mit einem inneren `JPanel`. Die Größe des Frame bzw. Panel können Sie beliebig wählen. Zeichnen Sie in das Fenster sodann ein Polygon.  
 
-    Hinweise: Sie können zur Lösung der Aufgabe die Klasse *java.awt.Polygon* verwenden. Die Eckpunkte des Ausgangspolygons können Sie beliebig wählen. Im Beispiel verwenden wir ein Dreieck mit den Punkten  
+    Hinweise: Sie können zur Lösung der Aufgabe die Klasse `java.awt.Polygon` verwenden. Die Eckpunkte des Ausgangspolygons können Sie beliebig wählen. Im Beispiel verwenden wir ein Dreieck mit den Punkten  
 p0=(250,50)  
 p1=(400,350)  
 p2 = (100,350)
 
 2. Implementieren Sie eine statische Methode  
-*static Polygon subdivide(Polygon polygon)*  
-die einen Unterteilungsschritt ausführt (das heißt, *subdivide* liefert für das Polygon in a) das Polygon in b) zurück).  
+`static Polygon subdivide(Polygon polygon)`  
+die einen Unterteilungsschritt ausführt (das heißt, `subdivide` liefert für das Polygon in a) das Polygon in b) zurück).  
 
     Betrachten Sie hierzu die aus Wikipedia übernommene Abbildung für die Unterteilung eines Linienstücks AE: 
     
-    ![Linienstück AB](line_segment.png)
+    ![Linienstück AB](pictures/line_segment.png)
     
     Die x-Koordinate des Punkts B in der Abbildung ergibt sich durch eine Linearkombination der x-Koordinaten der beiden Punkte A und E:
 
-    ![Bx](Bx.png)
+    ![Bx](pictures/Bx.png)
 
     Analog für die y-Koordinate:
 
-    ![By](By.png)
+    ![By](pictures/By.png)
 
     Für den Punkt D verwenden Sie die Faktoren 1/3 und 2/3.
 
@@ -47,14 +47,14 @@ die einen Unterteilungsschritt ausführt (das heißt, *subdivide* liefert für d
     Die Längen von b und e sind bekannt (1/3 der Länge von AE bzw. 1/6 der Länge von AE). Bestimmen Sie anhand des Satzes von Pythagoras die Länge von d (es gilt b² = e² + d²).
 
     Den Punkt C erhalten Sie, indem Sie den (normierten!) Vektor n, skaliert mit der Länge von d, komponentenweise auf den Mittelpunkt pM addieren. Gehen Sie nun für jedes Eckpunktepaar P(i), P((i+1) mod n) des Polygons wie folgt vor:  
-    1. übernehmen Sie den Punkt pi in das neue Polygon  
+    1. übernehmen Sie den Punkt Pi in das neue Polygon  
     2. übernehmen Sie den Punkt B in das neue Polygon  
     3. übernehmen Sie den Punkt C in das neue Polygon  
     4. übernehmen Sie den Punkt D in das neue Polygon  
 
-    Sie benötigen die Polygon-Eigenschaften xpoints, ypoints und npoints sowie die Polygon-Methode addPoint. Beachten Sie, dass addPoint ganzzahlige Koordinaten erwartet; Sie müssen die Fließkommawerte der berechneten Punkte somit in int casten. Bei der Berechnung der neuen Punkte B, C und D müssen Sie umgekehrt die ganzzahligen Polygon-Koordinaten in Fließkommawerte wandeln.
+    Sie benötigen die Polygon-Eigenschaften xpoints, ypoints und npoints sowie die Polygon-Methode `addPoint`. Beachten Sie, dass `addPoint` ganzzahlige Koordinaten erwartet; Sie müssen die Fließkommawerte der berechneten Punkte somit in `int` casten. Bei der Berechnung der neuen Punkte B, C und D müssen Sie umgekehrt die ganzzahligen Polygon-Koordinaten in Fließkommawerte wandeln.
 
-    Wenn es Ihnen hilft, können Sie die folgende Klasse Vector2 verwenden und ggf. weitere Methoden in dieser Klasse ergänzen:
+    Wenn es Ihnen hilft, können Sie die folgende Klasse `Vector2` verwenden und ggf. weitere Methoden in dieser Klasse ergänzen:
 
     ```sh
     public class Vector2 {
@@ -77,10 +77,10 @@ die einen Unterteilungsschritt ausführt (das heißt, *subdivide* liefert für d
     ```
 
 3. Implementieren Sie nun eine Methode  
-*static Polygon subdivide(Polygon polygon, int steps)*  
-die das übergebene Polygon mittels der Methode *subdivide* aus Aufgabenteil 2 rekursiv oder iterativ unterteilt, bis *steps* gleich 0 ist. Wenn Sie diese Methode beispielsweise für das Polygon aus Abbildung a) und *steps = 2* aufrufen, erhalten Sie das Ergebnis aus Abbildung c).
+`static Polygon subdivide(Polygon polygon, int steps)`  
+die das übergebene Polygon mittels der Methode `subdivide` aus Aufgabenteil 2 rekursiv oder iterativ unterteilt, bis `steps` gleich 0 ist. Wenn Sie diese Methode beispielsweise für das Polygon aus Abbildung a) und `steps = 2` aufrufen, erhalten Sie das Ergebnis aus Abbildung c).
 
-    Implementieren Sie zudem im Hauptprogramm (main) ein Auslesen der Aufrufparameter (args-Array), so dass die Unterteilungsstufe beim Aufruf des Programms angegeben werden kann:
+    Implementieren Sie zudem im Hauptprogramm `(main)` ein Auslesen der Aufrufparameter `(args-Array)`, so dass die Unterteilungsstufe beim Aufruf des Programms angegeben werden kann:
 
     ```sh   
     java KochKurve 5
